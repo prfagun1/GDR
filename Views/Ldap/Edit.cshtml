@@ -1,0 +1,26 @@
+﻿@model GDR.Models.Ldap
+
+@{
+    ViewData["Title"] = "Edição de parametros LDAP";
+}
+
+<h2>Edição de parâmetros LDAP</h2>
+<br />
+
+<div class="row ">
+    <div class="col-md-12 form">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+
+            <partial name="_Form" />
+
+
+        </form>
+    </div>
+</div>
+
+
+
+
+

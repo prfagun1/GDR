@@ -1,0 +1,29 @@
+﻿@model GDR.Models.Report
+
+
+@{
+    ViewData["Title"] = "Cadastro de relatórios";
+}
+
+<h2>Cadastro de relatórios</h2>
+<br />
+
+<div class="row">
+    <div class="col-md-12 form">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <partial name="_Form" />
+
+
+        </form>
+    </div>
+</div>
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/multilist.js"></script>
+}

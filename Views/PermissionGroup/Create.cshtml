@@ -1,0 +1,29 @@
+﻿@model GDR.Models.PermissionGroup
+
+@{
+    ViewData["Title"] = "Cadastro de grupos de permissão";
+}
+
+<h1>Cadastro de grupos de permissão</h1>
+<br />
+
+<div class="row">
+    <div class="col-md-12 form">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <partial name="_Form" />
+
+
+        </form>
+    </div>
+</div>
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/permission-group.js"></script>
+    <script src="~/js/multilist.js"></script>
+}

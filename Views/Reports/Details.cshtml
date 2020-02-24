@@ -1,0 +1,87 @@
+﻿@model GDR.Models.Report
+
+@{
+    ViewData["Title"] = "Detalhes do relatório " + @Model.Name;
+}
+
+<h2>Detalhes do relatório @Model.Name</h2>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name) &nbsp;
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description) &nbsp;
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SQL)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SQL) <br />&nbsp; 
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ReportDatabaseGDR)
+        </dt>
+        <dd class="col-sm-10">
+            @foreach (var database in ViewBag.DatabaseList)
+            {
+                <text>@database.Name</text><br />
+            }
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ReportPermissionGroup)
+        </dt>
+        <dd class="col-sm-10">
+            @foreach (var permissionGroup in ViewBag.PermissionGroupList)
+            {
+                <text>@permissionGroup.GroupName</text><br />
+            }
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Enable)
+        </dt>
+        <dd class="col-sm-10">
+            @if (Model.Enable == EnableEnum.Enabled)
+            {
+                <text>Ativo</text>
+            }
+            else
+            {
+                <text>Inativo</text>
+            }
+        </dd>
+    </dl>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User) &nbsp;
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ChangeDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ChangeDate) &nbsp;
+        </dd>
+    </dl>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-success">
+        <i class="fa fa-backward"></i> Voltar para lista
+    </a>
+
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success">
+        <i class="fa fa-edit"></i> Editar
+    </a>
+</div>

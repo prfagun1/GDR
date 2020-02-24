@@ -1,0 +1,19 @@
+﻿@model GDR.Models.DatabaseType
+
+@{
+    ViewData["Title"] = "Edição de tipos de banco de dados";
+}
+
+    <h2>Edição de tipos de banco de dados</h2>
+<br />
+
+<div class="row">
+    <div class="col-md-12 form">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <partial name="_Form" />
+
+        </form>
+    </div>
+</div>

@@ -1,0 +1,63 @@
+﻿@model GDR.Models.PermissionGroup
+
+<div class="form-group">
+    <label asp-for="GroupName" class="control-label"></label>
+    <input asp-for="GroupName" class="form-control" />
+    <span asp-validation-for="GroupName" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="Domain" class="control-label"></label>
+    <input asp-for="Domain" class="form-control" />
+    <span asp-validation-for="Domain" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="AccessType" class="control-label"></label>
+    <select asp-for="AccessType" class="form-control" asp-items="ViewBag.AccessType">
+        <option disabled selected></option>
+    </select>
+    <span asp-validation-for="AccessType" class="text-danger"></span>
+</div>
+
+<div class="control-label">Relatórios</div>
+
+<div class="row multiple-select-list">
+
+    <div class="">
+        <select asp-for="ReportPermissionGroup" class="form-control multiple-select-list-item-box" id="ReportId" name="ReportId" asp-items="ViewBag.ReportId"></select>
+    </div>
+
+    <div class="multiple-select-list-item-btn">
+
+        <button type="button" class="btn btn-success" onclick="addItem('ReportId','ReportIdSelected')">
+            <i class="fa fa-arrow-right"></i>
+        </button>
+        &nbsp;
+        <button type="button" class="btn btn-success" onclick="removeItem('ReportId','ReportIdSelected')">
+            <i class="fa fa-arrow-left"></i>
+        </button>
+
+    </div>
+
+    <div class="">
+        <select asp-for="ReportPermissionGroup" class="form-control multiple-select-list-item-box" id="ReportIdSelected" name="ReportIdSelected" asp-items="ViewBag.ReportIdSelected"></select>
+    </div>
+
+</div>
+<div>
+    &nbsp; &nbsp;*Selecione os relatórios deste banco de dados.
+</div>
+
+<br />
+
+<div class="form-group" align="right">
+
+    <br />
+    <a asp-action="Index" class="btn btn-success">
+        <i class="fa fa-backward"></i> Voltar
+    </a>
+    &nbsp;&nbsp;
+    <button type="submit" class="btn btn-success" onclick="seleciona('ReportIdSelected')">
+        <i class="fa fa-save"></i> Salvar
+    </button>
+
+</div>

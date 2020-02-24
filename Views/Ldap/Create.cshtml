@@ -1,0 +1,24 @@
+﻿@model GDR.Models.Ldap
+
+@{
+    ViewData["Title"] = "Cadastro de parametros LDAP";
+}
+
+<h2>Cadastro de parâmetros LDAP</h2>
+<br />
+
+<div class="row ">
+    <div class="col-md-12">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <partial name="_Form" />
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

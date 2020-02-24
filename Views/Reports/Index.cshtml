@@ -1,0 +1,79 @@
+﻿@model IEnumerable<GDR.Models.Report>
+
+@{
+    ViewBag.Title = "Listagem de relatórios";
+}
+
+<h1>Listagem de relatórios</h1>
+
+<br />
+
+<div class="row">
+    <div class="form-group col-md-6">
+        <div class="input-group">
+            <input type="text" id="Name" class="form-control table-filter-box" placeholder="Digite para pesquisar">
+            <div class="input-group-append">
+                <span class="input-group-text bg-success"><i class="text-light fa fa-search"></i></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+
+<p>
+    <a href="@Url.Action("Create")" class="btn btn-success">
+        <span class="fa fa-plus"></span>
+        Cadastrar novo relatório
+    </a>
+</p>
+
+
+<div class="text-danger font-weight-bold">
+    @Html.Raw(ViewBag.RegistroApagado)
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Enable)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="tr-filter">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @if (item.Enable == EnableEnum.Enabled)
+                    {
+                        <text>Ativo</text>
+                    }
+                    else
+                    {
+                        <text>Inativo</text>
+                    }
+                </td>
+                <td class="cabecalhos-pesquisa">
+                    <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id" data-item-id="@item.Id" data-item-description="@item.Name" data-toggle="modal" data-target="#confirm-delete" data-parent="Reports">Apagar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<partial name="~/Views/Shared/_ModalDelete.cshtml" />
+
+@section scripts{
+    <script src="~/js/table-filter.js"></script>
+    <script src="~/js/modal.js"></script>
+}

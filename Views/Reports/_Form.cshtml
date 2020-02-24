@@ -1,0 +1,103 @@
+﻿@model GDR.Models.Report
+
+<div class="form-group">
+    <label asp-for="Name" class="control-label"></label>
+    <input asp-for="Name" class="form-control" />
+    <span asp-validation-for="Name" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="Description" class="control-label"></label>
+    <textarea asp-for="Description" class="form-control multiLineDescription"></textarea>
+    <span asp-validation-for="Description" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="SQL" class="control-label"></label>
+    <textarea asp-for="SQL" class="form-control multiLine"></textarea>
+    <span asp-validation-for="SQL" class="text-danger"></span>
+</div>
+
+
+
+<div class="control-label">Relatórios</div>
+
+<div class="row multiple-select-list">
+
+    <div class="multiple-select-list-item-box">
+        <select asp-for="ReportDatabaseGDR" class="form-control multiList" id="DatabaseID" name="DatabaseID" asp-items="ViewBag.DatabaseID"></select>
+    </div>
+
+    <div class="multiple-select-list-item-btn">
+
+        <button type="button" class="btn btn-success" onclick="addItem('DatabaseID','DatabaseIDSelected')">
+            <i class="fa fa-arrow-right"></i>
+        </button>
+        &nbsp;
+        <button type="button" class="btn btn-success" onclick="removeItem('DatabaseID','DatabaseIDSelected')">
+            <i class="fa fa-arrow-left"></i>
+        </button>
+
+    </div>
+
+    <div class="multiple-select-list-item-box">
+        <select asp-for="ReportDatabaseGDR" class="form-control multiList" id="DatabaseIDSelected" name="DatabaseIDSelected" asp-items="ViewBag.DatabaseIDSelected"></select>
+    </div>
+
+</div>
+<div>
+    &nbsp; &nbsp;*Selecione os bancos de dados deste relatório.
+</div>
+
+
+<br />
+
+
+<div class="control-label">Grupos de permissão</div>
+
+<div class="row multiple-select-list">
+
+    <div class="">
+        <select asp-for="ReportPermissionGroup" class="form-control multiple-select-list-item-box" id="PermissionGroupID" name="PermissionGroupID" asp-items="ViewBag.PermissionGroupId"></select>
+    </div>
+
+    <div class="multiple-select-list-item-btn">
+
+        <button type="button" class="btn btn-success" onclick="addItem('PermissionGroupID','PermissionGroupIdSelected')">
+            <i class="fa fa-arrow-right"></i>
+        </button>
+        &nbsp;
+        <button type="button" class="btn btn-success" onclick="removeItem('PermissionGroupID','PermissionGroupIdSelected')">
+            <i class="fa fa-arrow-left"></i>
+        </button>
+
+    </div>
+
+    <div class="">
+        <select asp-for="ReportPermissionGroup" class="form-control multiple-select-list-item-box" id="PermissionGroupIdSelected" name="PermissionGroupIdSelected" asp-items="ViewBag.PermissionGroupIdSelected"></select>
+    </div>
+
+</div>
+<div>
+    &nbsp; &nbsp;*Selecione os grupos de permissão que terão acesso a este relatório.
+</div>
+
+<br />
+
+<div class="form-group">
+    <label asp-for="Enable" class="control-label"></label>
+    <select asp-for="Enable" class="form-control col-md-2" asp-items="ViewBag.EnableSelect">
+    </select>
+</div>
+
+
+<div class="form-group" align="right">
+
+    <br />
+    <a asp-action="Index" class="btn btn-success">
+        <i class="fa fa-backward"></i> Voltar
+    </a>
+    &nbsp;&nbsp;
+    <button type="submit" class="btn btn-success" onclick="seleciona2('DatabaseIDSelected', 'PermissionGroupIdSelected')">
+        <i class="fa fa-save"></i> Salvar
+    </button>
+
+</div>

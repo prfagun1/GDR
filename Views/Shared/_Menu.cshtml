@@ -1,0 +1,65 @@
+﻿<div class="container-fluid body-margin menuTop">
+
+    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">GDR</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCustom">
+        <i class="fa fa-bars fa-lg py-1 text-white"></i>
+    </button>
+    <div class="navbar-collapse collapse" id="navbarCustom">
+        <ul class="navbar-nav">
+            <li>
+                <ul class="navbar-nav">
+                    @{
+                        if (User.HasClaim(c => c.Type == "Administration"))
+                        {
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Parâmetros
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" asp-controller="Ldap" asp-action="Details" asp-route-id="1">LDAP</a>
+                                    <a class="dropdown-item" asp-controller="Parameter" asp-action="Details" asp-route-id="1">Parâmetros de ambiente</a>
+                                </div>
+                            </li>
+                        }
+                    }
+                </ul>
+            </li>
+            <li>
+                <ul class="navbar-nav">
+                    @{
+                        if (User.HasClaim(c => c.Type == "Administration"))
+                        {
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Cadastros
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" asp-controller="DatabaseGDR" asp-action="Index">Bancos de dados</a>
+                                    <a class="dropdown-item" asp-controller="DatabaseTypes" asp-action="Index">Bancos de dados - Tipos</a>
+                                    <a class="dropdown-item" asp-controller="PermissionGroup" asp-action="Index">Grupos de permissão</a>
+                                    <a class="dropdown-item" asp-controller="Reports" asp-action="Index">Relatórios</a>
+                                </div>
+                            </li>
+                        }
+                    }
+                </ul>
+            </li>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="UserReports" asp-action="Index">Relatórios</a>
+                </li>
+            }
+        </ul>
+    </div>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <span class="ml-auto navbar-text navbar-right">
+            Usuário: @User.Identity.Name | @Html.ActionLink("Sair", "LogOff", "Authentication", null, new { Class = "action add text-white", title = "Fazer logoff." })
+        </span>
+    }
+
+</div>

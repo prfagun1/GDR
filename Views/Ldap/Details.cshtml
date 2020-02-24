@@ -1,0 +1,78 @@
+﻿@model GDR.Models.Ldap
+
+@{
+    ViewData["Title"] = "Detalhes da configuração dos parâmetros LDAP";
+}
+
+<h2>Detalhes da configuração dos parâmetros LDAP</h2>
+
+<div>
+    <hr />
+
+    <dl class="row">
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Server)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Server) &nbsp;
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Port)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Port) &nbsp;
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.BindLogin)
+        </dt>
+        <dd class="col-sm-9">
+            @ViewBag.BindLogin &nbsp;
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.SearchFilterUser)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.SearchFilterUser) &nbsp;
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.SearchFilterGroup)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.SearchFilterGroup) &nbsp;
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.SearchBase)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.SearchBase) &nbsp;
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.LdapVersion)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.LdapVersion) &nbsp;
+        </dd>
+    </dl>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.User)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.User)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.ChangeDate)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.ChangeDate)
+        </dd>
+    </dl>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success">
+        <i class="fa fa-edit"></i> Editar
+    </a>
+</div>
+

@@ -1,0 +1,40 @@
+﻿@model GDR.Models.Parameter
+
+
+    <div class="form-group">
+        <label asp-for="LogErrorPath" class="control-label"></label>
+        <input asp-for="LogErrorPath" class="form-control" />
+        <span asp-validation-for="LogErrorPath" class="text-danger"></span>
+    </div>
+
+
+    <div class="row">
+        <div class="form-group col-md-5">
+            <label asp-for="AdminUser" class="control-label"></label>
+            <input asp-for="AdminUser" value="@ViewBag.AdminUser" name="AdminUser" id="AdminUser" class="form-control" />
+            <span asp-validation-for="AdminUser" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-5">
+            <label asp-for="AdminPassword" class="control-label"></label>
+            <input asp-for="AdminPassword" class="form-control" />
+            <span asp-validation-for="AdminPassword" class="text-danger"></span>
+        </div>
+
+        <div class="form-group col-md-2">
+            <label asp-for="LogLevelApplication" class="control-label"></label>
+            <select asp-for="LogLevelApplication" asp-items="@ViewBag.LogLevelSelect" class="form-control"></select>
+            <span asp-validation-for="LogLevelApplication" class="text-danger"></span>
+        </div>
+    </div>
+<div class="form-group" align="right">
+
+    <br />
+    <button class="btn btn-success" asp-action="Details" asp-route-id="1">
+        <i class="fa fa-backward"></i> Voltar
+    </button>
+    &nbsp;&nbsp;
+    <button type="submit" class="btn btn-success">
+        <i class="fa fa-save"></i> Salvar
+    </button>
+
+</div>

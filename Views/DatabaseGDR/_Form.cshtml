@@ -1,0 +1,112 @@
+﻿@model GDR.Models.DatabaseGDR
+
+<div class="form-group">
+    <label asp-for="Name" class="control-label"></label>
+    <input asp-for="Name" class="form-control" />
+    <span asp-validation-for="Name" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="Description" class="control-label"></label>
+    <textarea asp-for="Description" class="form-control multiLine"></textarea>
+    <span asp-validation-for="Description" class="text-danger"></span>
+</div>
+
+<div class="row">
+    <div class="form-group col-md-6">
+        <label asp-for="DatabaseName" class="control-label"></label>
+        <input asp-for="DatabaseName" class="form-control" />
+        <span asp-validation-for="DatabaseName" class="text-danger"></span>
+    </div>
+    <div class="form-group col-md-6">
+        <label asp-for="DatabaseServer" class="control-label"></label>
+        <input asp-for="DatabaseServer" class="form-control" />
+        <span asp-validation-for="DatabaseServer" class="text-danger"></span>
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-md-5">
+        <label asp-for="DatabaseUser" class="control-label"></label>
+        <input asp-for="DatabaseUser" class="form-control" value="@ViewBag.DatabaseUser" />
+        <span asp-validation-for="DatabaseUser" class="text-danger"></span>
+    </div>
+    <div class="form-group col-md-5">
+        <label asp-for="DatabasePassword" class="control-label"></label>
+        <input asp-for="DatabasePassword" class="form-control" />
+        <span asp-validation-for="DatabasePassword" class="text-danger"></span>
+    </div>
+    <div class="form-group col-md-2">
+        <label asp-for="Port" class="control-label"></label>
+        <input asp-for="Port" class="form-control" />
+        <span asp-validation-for="Port" class="text-danger"></span>
+    </div>
+</div>
+<div class="form-group">
+    <label asp-for="DatabaseTypeId" class="control-label"></label>
+    <select asp-for="DatabaseTypeId" class="form-control" asp-items="ViewBag.DatabaseTypeId">
+        <option disabled selected></option>
+    </select>
+    <span asp-validation-for="DatabaseTypeId" class="text-danger"></span>
+</div>
+<div class="form-group" id="ConnectionStringODBC">
+    <label asp-for="ConnectionString" class="control-label"></label>
+    <textarea asp-for="ConnectionString" class="form-control"></textarea>
+    <span asp-validation-for="ConnectionString" class="text-danger"></span>
+    <div class="font-information">
+        * Informe a string de conexão de acordo com o exemplo abaixo, usando as palavras chaves para completar com os campos já informados: <br />
+        &nbsp;DRIVER=Progress OpenEdge 11.6 Driver;HOST=<i>"Nome do servidor"</i>;PORT=<i>"Porta"</i>;DB=<i>"Nome do banco"</i>;UID=<i>"Nome do usuário"</i>;PWD=<i>"Senha"</i>;DIL=0 <br />
+
+    </div>
+</div>
+
+<br />
+<div class="control-label">Relatórios</div>
+
+<div class="row multiple-select-list">
+
+    <div class="">
+        <select asp-for="ReportDatabaseGDR" class="form-control multiple-select-list-item-box" id="ReportId" name="ReportId" asp-items="ViewBag.ReportId"></select>
+    </div>
+
+    <div class="multiple-select-list-item-btn">
+
+        <button type="button" class="btn btn-success" onclick="addItem('ReportId','ReportIdSelected')">
+            <i class="fa fa-arrow-right"></i>
+        </button>
+        &nbsp;
+        <button type="button" class="btn btn-success" onclick="removeItem('ReportId','ReportIdSelected')">
+            <i class="fa fa-arrow-left"></i>
+        </button>
+
+    </div>
+
+    <div class="">
+        <select asp-for="ReportDatabaseGDR" class="form-control multiple-select-list-item-box" id="ReportIdSelected" name="ReportIdSelected" asp-items="ViewBag.ReportIdSelected"></select>
+    </div>
+
+</div>
+<div>
+    &nbsp; &nbsp;*Selecione os relatórios deste banco de dados.
+</div>
+
+<br />
+
+
+<div class="form-group">
+    <label asp-for="Enable" class="control-label"></label>
+    <select asp-for="Enable" class="form-control col-md-2" asp-items="ViewBag.EnableSelect">
+    </select>
+</div>
+
+
+<div class="form-group" align="right">
+
+    <br />
+    <a asp-action="Index" class="btn btn-success">
+        <i class="fa fa-backward"></i> Voltar
+    </a>
+    &nbsp;&nbsp;
+    <button type="submit" class="btn btn-success" onclick="seleciona('ReportIdSelected')">
+        <i class="fa fa-save"></i> Salvar
+    </button>
+
+</div>

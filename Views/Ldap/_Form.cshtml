@@ -1,0 +1,62 @@
+﻿@model GDR.Models.Ldap
+
+<div class="row">
+    <div class="form-group col-md-6">
+        <label asp-for="Server" class="control-label"></label>
+        <input asp-for="Server" class="form-control" />
+        <span asp-validation-for="Server" class="text-danger"></span>
+    </div>
+    <div class="form-group  col-md-3">
+        <label asp-for="Port" class="control-label"></label>
+        <input asp-for="Port" class="form-control" />
+        <span asp-validation-for="Port" class="text-danger"></span>
+    </div>
+
+    <div class="form-group col-md-3">
+        <label asp-for="LdapVersion" class="control-label"></label>
+        <input asp-for="LdapVersion" class="form-control" />
+        <span asp-validation-for="LdapVersion" class="text-danger"></span>
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group  col-md-8">
+        <label asp-for="BindLogin" class="control-label"></label>
+        <input asp-for="BindLogin" value="@ViewBag.BindLogin" class="form-control" />
+        <span asp-validation-for="BindLogin" class="text-danger"></span>
+    </div>
+    <div class="form-group  col-md-4">
+        <label asp-for="BindPassword" class="control-label"></label>
+        <input asp-for="BindPassword" class="form-control" />
+        <span asp-validation-for="BindPassword" class="text-danger"></span>
+    </div>
+</div>
+<div class="form-group">
+    <label asp-for="SearchFilterUser" class="control-label"></label>
+    <input asp-for="SearchFilterUser" class="form-control" />
+    <span asp-validation-for="SearchFilterUser" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="SearchFilterGroup" class="control-label"></label>
+    <input asp-for="SearchFilterGroup" class="form-control" />
+    <span asp-validation-for="SearchFilterGroup" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="SearchBase" class="control-label"></label>
+    <input asp-for="SearchBase" class="form-control" />
+    <span asp-validation-for="SearchBase" class="text-danger"></span>
+</div>
+
+
+<br />
+
+<div class="form-group" align="right">
+
+    <button class="btn btn-success" asp-action="Details" asp-route-id="1">
+        <i class="fa fa-backward"></i> Voltar
+    </button>
+    &nbsp;&nbsp;
+    <button type="submit" class="btn btn-success">
+        <i class="fa fa-save"></i> Salvar
+    </button>
+</div>

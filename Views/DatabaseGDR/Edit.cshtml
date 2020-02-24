@@ -1,0 +1,26 @@
+﻿@model GDR.Models.DatabaseGDR
+
+@{
+    ViewData["Title"] = "Edição de banco de dados";
+}
+
+<h1>Edição de tipos de banco de dados</h1>
+
+<div class="row">
+    <div class="col-md-12 form">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <partial name="_Form" />
+
+
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/database-gdr.js"></script>
+    <script src="~/js/multilist.js"></script>
+}

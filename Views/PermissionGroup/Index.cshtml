@@ -1,0 +1,94 @@
+﻿@model IEnumerable<GDR.Models.PermissionGroup>
+
+@{
+    ViewBag.Title = "Listagem de grupos de permissão";
+}
+
+<h1>Listagem de grupos de permissão</h1>
+
+<br />
+
+<div class="row">
+    <div class="form-group col-md-6">
+        <div class="input-group">
+            <input type="text" id="Name" class="form-control table-filter-box" placeholder="Digite para pesquisar">
+            <div class="input-group-append">
+                <span class="input-group-text bg-success"><i class="text-light fa fa-search"></i></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+
+<p>
+    <a href="@Url.Action("Create")" class="btn btn-success">
+        <span class="fa fa-plus"></span>
+        Cadastrar novo grupo de permissão
+    </a>
+</p>
+
+
+<div class="text-danger font-weight-bold">
+    @Html.Raw(ViewBag.RegistroApagado)
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.GroupName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Domain)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AccessType)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr class="tr-filter">
+            <td>
+                @Html.DisplayFor(modelItem => item.GroupName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Domain)
+            </td>
+            <td>
+                @switch (item.AccessType)
+                {
+                    case AccessTypeEnum.Administration:
+                        <text>Administrador da ferramenta</text>
+                        break;
+                    case AccessTypeEnum.DatabaseAdministration:
+                        <text>Administrador da banco de dados</text>
+                        break;
+                    case AccessTypeEnum.ReportsAdministration:
+                        <text>Administrador de relatórios</text>
+                        break;
+                    case AccessTypeEnum.Read:
+                        <text>Leitura de relatórios</text>
+                        break;
+                }
+
+
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                <a asp-action="Details" asp-route-id="@item.Id" data-item-id="@item.Id" data-item-description="@item.GroupName" data-toggle="modal" data-target="#confirm-delete" data-parent="PermissionGroup">Apagar</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+<partial name="~/Views/Shared/_ModalDelete.cshtml" />
+
+@section scripts{
+    <script src="~/js/table-filter.js"></script>
+    <script src="~/js/modal.js"></script>
+}

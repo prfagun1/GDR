@@ -1,0 +1,24 @@
+﻿@model GDR.Models.Parameter
+
+@{
+    ViewData["Title"] = "Cadastro de parametros de ambiente";
+}
+
+<h2>Cadastro  de parametros de ambiente</h2>
+<br />
+
+<div class="row ">
+    <div class="col-md-12">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <partial name="_Form" />
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

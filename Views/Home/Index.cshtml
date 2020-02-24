@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h1>Gerador dinâmico de relatório</h1>
+<br />
+<br />
+
+<div class="row">
+    <div class="col-sm-4 col-md-4">
+        <div class="card">
+            <div class="card-header text-white bg-success">Relatórios cadastrados</div>
+            <div class="card-body">
+                <p>Relatórios: @ViewBag.Reports</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4 col-md-4">
+        <div class="card">
+            <div class="card-header text-white bg-success">Bancos cadastrados</div>
+            <div class="card-body">
+                <p>Banco de dados: @ViewBag.Databases</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4 col-md-4">
+        <div class="card">
+            <div class="card-header text-white bg-success">Logs gerados</div>
+            <div class="card-body">
+                <p>Logs: @ViewBag.Logs</p>
+            </div>
+        </div>
+    </div>
+</div>

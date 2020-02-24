@@ -1,0 +1,53 @@
+﻿@model GDR.Models.Parameter
+
+@{
+    ViewData["Title"] = "Detalhes da configuração de parâmetros";
+}
+
+<h2>Detalhes da configuração de parâmetros</h2>
+
+<div>
+    <hr />
+
+    <dl class="row">
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.LogErrorPath)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.LogErrorPath) &nbsp;
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.LogLevelApplication)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.LogLevelApplication) &nbsp;
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.AdminUser)
+        </dt>
+        <dd class="col-sm-9">
+            @ViewBag.AdminUser &nbsp;
+        </dd>
+    </dl>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.User)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.User) &nbsp;
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.ChangeDate)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.ChangeDate) &nbsp;
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success">
+        <i class="fa fa-edit"></i> Editar
+    </a>
+</div>
+
