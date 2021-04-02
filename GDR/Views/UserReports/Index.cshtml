@@ -10,8 +10,8 @@
 
 <br />
 <form asp-controller="UserReports" asp-action="Index" method="get">
-    <div class="col-md-12">
-        <div class="form-group">
+    <div class="row">
+        <div class="form-group col-md-12">
             <p class="col-form-label">Selecione um relatórios</p>
             <select class="form-control  col-md-12" asp-items="@ViewBag.ReportList" id="ReportList" name="ReportList">
                 <option disabled selected></option>
@@ -19,25 +19,36 @@
         </div>
 
 
-        <div class="form-group">
+        <div class="form-group col-md-12">
             <p class="col-form-label">Selecione um banco de dados</p>
             <select class="form-control" multiple="multiple" id="DatabaseList" name="DatabaseList" asp-items="@ViewBag.DatabaseList">
             </select>
         </div>
 
+        <div class="form-group col-md-6">
+            <p class="col-form-label">Filtro para geração do relatório</p>
+            <div class="input-group">
+                <input type="text" id="Filtro" name="Filtro" class="form-control" placeholder="Digite realizar filtro no resultado que será pesquisado" value="@ViewBag.Filtro">
+                <div class="input-group-append">
+                    <span class="input-group-text bg-success"><i class="text-light fa fa-search"></i></span>
+                </div>
+            </div>
+        </div>
 
-        <p class="col-form-label">Filtro</p>
-        <div class="input-group">
+        <div class="form-group col-md-6">
+            <p class="col-form-label">Filtro após o relatório gerado</p>
+            <div class="input-group">
 
-            <input type="text" id="Name" class="form-control table-filter-box" placeholder="Digite para pesquisar após o relatório ser exibido">
-            <div class="input-group-append">
-                <span class="input-group-text bg-success"><i class="text-light fa fa-search"></i></span>
+                <input type="text" id="Name" class="form-control table-filter-box" placeholder="Digite para pesquisar após o relatório ser exibido">
+                <div class="input-group-append">
+                    <span class="input-group-text bg-success"><i class="text-light fa fa-search"></i></span>
+                </div>
             </div>
         </div>
 
         <br />
 
-        <div align="right">
+        <div align="right" class="col-md-12 form-group">
             <button type="submit" value="Pesquisar" class="btn btn-success">
                 <span class=""></span>
                 Exibir relatório

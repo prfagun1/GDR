@@ -18,7 +18,7 @@ namespace GDR.Lib
 
     public interface IDatabaseConnection
     {
-        Task<List<ReportResult>> Get(Report report, List<DatabaseGDR> databaseGDRList);
+        Task<List<ReportResult>> Get(Report report, List<DatabaseGDR> databaseGDRList, string filtro);
     }
     public class DatabaseConnection : IDatabaseConnection
     {
@@ -30,15 +30,15 @@ namespace GDR.Lib
             this.log = log;
         }
 
-        public async Task<List<ReportResult>> Get(Report report, List<DatabaseGDR> databaseGDRList)
+        public async Task<List<ReportResult>> Get(Report report, List<DatabaseGDR> databaseGDRList, string filtro)
         {
 
-            return await GetReportResult(databaseGDRList, report);
+            return await GetReportResult(databaseGDRList, report, filtro);
 
         }
 
 
-        private async Task<List<ReportResult>> GetReportResult(List<DatabaseGDR> databaseGDRList, Report report)
+        private async Task<List<ReportResult>> GetReportResult(List<DatabaseGDR> databaseGDRList, Report report, string filtro)
         {
 
             List<ReportResult> reportResult = new List<ReportResult>();
@@ -46,7 +46,7 @@ namespace GDR.Lib
 
             foreach (var database in databaseGDRList)
             {
-                reportResult.AddRange(await GetDatabaseResult(database, report, header));
+                reportResult.AddRange(await GetDatabaseResult(database, report, header, filtro));
                 header = false;
             }
 
@@ -59,7 +59,7 @@ namespace GDR.Lib
             return reportResult;
         }
 
-        private async Task<List<ReportResult>> GetDatabaseResult(DatabaseGDR databaseGDR, Report report, bool header)
+        private async Task<List<ReportResult>> GetDatabaseResult(DatabaseGDR databaseGDR, Report report, bool header, string filtro)
         {
 
             String connectionString;
@@ -78,35 +78,35 @@ namespace GDR.Lib
                     connection = new MySqlConnection();
                     cmd = new MySqlCommand();
                     connectionString = $"server={databaseGDR.DatabaseServer};uid={databaseUser};Pwd={databasePassword};Database={databaseGDR.DatabaseName};Port={databaseGDR.Port}";
-                    return await MultiDatabaseConnection(report.SQL, connection, cmd, connectionString, header);
+                    return await MultiDatabaseConnection(report.SQL, connection, cmd, connectionString, header, filtro);
 
                 //Oracle
                 case 2:
                     connection = new OracleConnection();
                     cmd = new OracleCommand();
                     connectionString = $"User Id={databaseUser};Password={databasePassword};Data Source={databaseGDR.DatabaseServer}:{databaseGDR.Port}/{databaseGDR.DatabaseName}";
-                    return await MultiDatabaseConnection(report.SQL, connection, cmd, connectionString, header);
+                    return await MultiDatabaseConnection(report.SQL, connection, cmd, connectionString, header, filtro);
 
                 //PostgreSQL
                 case 3:
                     connection = new NpgsqlConnection();
                     cmd = new NpgsqlCommand();
                     connectionString = $"Host={databaseGDR.DatabaseServer};Username={databaseUser};Password={databasePassword};Database={databaseGDR.DatabaseName};Port={databaseGDR.Port}";
-                    return await MultiDatabaseConnection(report.SQL, connection, cmd, connectionString, header);
+                    return await MultiDatabaseConnection(report.SQL, connection, cmd, connectionString, header, filtro);
 
                 //SQL Server
                 case 4:
                     connection = new SqlConnection();
                     cmd = new SqlCommand();
                     connectionString = $"Server={databaseGDR.DatabaseServer},{databaseGDR.Port};User Id={databaseUser};Password={databasePassword};Initial Catalog={databaseGDR.DatabaseName}";
-                    return await MultiDatabaseConnection(report.SQL, connection, cmd, connectionString, header);
+                    return await MultiDatabaseConnection(report.SQL, connection, cmd, connectionString, header, filtro);
 
                 //Firebird
                 case 5:
                     connection = new FbConnection();
                     cmd = new FbCommand();
                     connectionString = $"User={databaseUser};Password={databasePassword};Database={databaseGDR.DatabaseName};DataSource={databaseGDR.DatabaseServer};Port={databaseGDR.Port}";
-                    return await MultiDatabaseConnection(report.SQL, connection, cmd, connectionString, header);
+                    return await MultiDatabaseConnection(report.SQL, connection, cmd, connectionString, header, filtro);
 
                 //OpenEdge
                 //Este driver usa o campo descrição para complementar a string odbc
@@ -120,13 +120,13 @@ namespace GDR.Lib
                     connectionString = connectionString.Replace("Nome do usuário", databaseUser);
                     connectionString = connectionString.Replace("Senha", databasePassword);
 
-                    return await MultiDatabaseConnection(report.SQL, connection, cmd, connectionString, header);
+                    return await MultiDatabaseConnection(report.SQL, connection, cmd, connectionString, header, filtro);
             }
 
             return null;
         }
 
-        private async Task<List<ReportResult>> MultiDatabaseConnection(string sql, dynamic connection, dynamic cmd, string connectionString, bool header)
+        private async Task<List<ReportResult>> MultiDatabaseConnection(string sql, dynamic connection, dynamic cmd, string connectionString, bool header, string filtro)
         {
 
             List<ReportResult> reportResultList = new List<ReportResult>();
@@ -139,6 +139,8 @@ namespace GDR.Lib
                 cmd.Connection = connection;
                 cmd.CommandText = sql;
                 cmd.CommandType = System.Data.CommandType.Text;
+                bool incluir = false;
+                string valor;
 
                 using (var reader = await cmd.ExecuteReaderAsync())
                 {
@@ -168,9 +170,24 @@ namespace GDR.Lib
                         ReportResult reportLine = new ReportResult();
                         for (int i = 0; i < reader.FieldCount; i++)
                         {
-                            reportLine.listaColuna.Add(reader[i].ToString());
+                            valor = reader[i].ToString();
+
+                            if (!string.IsNullOrEmpty(filtro))
+                            {
+                                if (valor.Contains(filtro))
+                                {
+                                    incluir = true;
+                                }
+                            }
+                            reportLine.listaColuna.Add(valor);
+                            
                         }
-                        reportResultList.Add(reportLine);
+                        if (incluir || string.IsNullOrEmpty(filtro)) {
+                            reportResultList.Add(reportLine);
+                            incluir = false;
+                        }
+
+
                     } while (reader.Read());
 
                 }

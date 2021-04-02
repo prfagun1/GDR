@@ -31,7 +31,7 @@ namespace GDR.Controllers
         }
 
         [Authorize(Policy = "Read")]
-        public async Task<IActionResult> Index(int? ReportList, int?[] DatabaseList)
+        public async Task<IActionResult> Index(int? ReportList, int?[] DatabaseList, string Filtro)
         {
 
             List<DatabaseGDR> databaseReport;
@@ -41,6 +41,7 @@ namespace GDR.Controllers
 
             List<Report> reportList = await reportRepository.GetList(permissionGroups);
             ViewBag.ReportList = new SelectList(reportList, "Id", "Name", ReportList);
+            ViewBag.Filtro = Filtro;
 
 
             List<ReportResult> reportResult = new List<ReportResult>();
@@ -63,7 +64,7 @@ namespace GDR.Controllers
                 try
                 {
                     ViewBag.DatabaseList = new MultiSelectList(databaseList, "Id", "Name", DatabaseList);
-                    reportResult = await databaseConnection.Get(report, databaseReport);
+                    reportResult = await databaseConnection.Get(report, databaseReport, Filtro);
 
                     await log.SaveLogApplicationMessage(ControllerName, $"Relatório {report.Name} executado.");
                 }
